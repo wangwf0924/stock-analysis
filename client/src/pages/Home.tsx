@@ -15,7 +15,6 @@ import Navbar from "@/components/Navbar";
 
 const HERO_BG = "https://private-us-east-1.manuscdn.com/sessionFile/o02SDJbfxWShGSF58qRhYJ/sandbox/3VhhR68TEpRpGh8fxjgRkE-img-1_1771916244000_na1fn_aGVyby1iZw.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvbzAyU0RKYmZ4V1NoR1NGNThxUmhZSi9zYW5kYm94LzNWaGhSNjhURXBScEdoOGZ4amdSa0UtaW1nLTFfMTc3MTkxNjI0NDAwMF9uYTFmbl9hR1Z5YnkxaVp3LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=bfw9gmSIE1U3A2~8v50M3O7utC4XAfNLiT3a5bWwTzd7MelFAwucrEsbluUeWyMCtoXWTgcLkvsVU754zPi7pbgIrsuRlnIcoJYHeUXsvT08lJDOYmEXxB-p5ABCmQS3CQ1ZuGHGLAwTynLfpgOaNlNIkFbXgLeexzzfz2P964kU113VRwZjDl30DlKxbZ4gioV334HHsSAnWsIPMSGUDyTbG-zkP1-L-o22QK6uy-0EVv~rNUA5WtCKaC--PrDgWOOFmD2LqjE5mTQB12kpSGrYUbpi5PManrKbd9VIauhUe3mWI5QzCg44fUnH1qf4RgDEndGq2s~dI4zoxsn7cg__";
 
-const PREDICTION_ICON = "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663376146662/xKqlQNNlKmuFGHRZ.png?Expires=1803461306&Signature=uZ5TdO6D1c2V-942WlloM-VGH742Wa1u~XyVTBFmlwH7yod4Ei8g0FDDJYhi1ngCJfyNv~T7vGEl4rFcZFf8Yhf4ZaYPC0OIsxsFQIyvv9gaBxoNchj4Th007fmOWkjGkJOwg9yJ5IFjROv~ygrtFDfZkJYI4NHXiR6le0Otvod72rOtZWeRdjGR5qlpA5NAMBbYm1ZbJUSx0Pmn85Vfmo1HvX2oR0hWEwbGn0e7WGr-Ffyg3xGhiMfknU3H3GgkDT~yVGZmaPjBgPfUMmEfaWBXZni2ijG4Z5vgRx9B3yPPMy429EPRAoH2nu2MOo33czC9iz~UIyIrJh0PEKn9mg__&Key-Pair-Id=K2HSFNDJXOU9YS";
 
 const THEORY_BG = "https://private-us-east-1.manuscdn.com/sessionFile/o02SDJbfxWShGSF58qRhYJ/sandbox/3VhhR68TEpRpGh8fxjgRkE-img-2_1771916246000_na1fn_dGhlb3J5LWJn.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvbzAyU0RKYmZ4V1NoR1NGNThxUmhZSi9zYW5kYm94LzNWaGhSNjhURXBScEdoOGZ4amdSa0UtaW1nLTJfMTc3MTkxNjI0NjAwMF9uYTFmbl9kR2hsYjNKNUxXSm4ucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Dpe9a8yhPot4griuhStMGcToX8eDGkV5TKRxHPhYrkrfep1zxUB9ffvqDjrEBC0W8UYbAg3ztv7o9n0Mvk3CwqnsmdDpPtiZ3GD8GaGuWyicCtZu92IoXgeSgSDz1tdXABxuL9vq5oIYHBG863wEMEu5hsbZa2JN73b9wfNmCcWI2ywNh9UcaZFfkF47OGLqnE7gdHmNqV-RUqT3PL2UlzTmqVa56k~g97oU-IV58F4Cy126zVTN6mOVXx4lUM-rVQNkTB2iEHiJhBfVHeRgM7oW4kbdEHccz~FPlapRjD5-XVmNI-OopeVutg5wT0Vm6dgwjEH0RDDYAEuNUBRUlw__";
 
@@ -166,15 +165,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 右侧装饰图 */}
-        <motion.div
-          className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <img src={PREDICTION_ICON} alt="AI预测" className="w-72 h-72 object-contain animate-float" />
-        </motion.div>
+
       </section>
 
       {/* 每日格言 */}

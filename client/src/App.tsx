@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Analysis from "./pages/Analysis";
 import Theories from "./pages/Theories";
 import Compare from "./pages/Compare";
+import Market from "./pages/Market";
+import Backtest from "./pages/Backtest";
 
 function Router() {
   return (
@@ -16,6 +18,8 @@ function Router() {
       <Route path="/analysis" component={Analysis} />
       <Route path="/theories" component={Theories} />
       <Route path="/compare" component={Compare} />
+      <Route path="/market" component={Market} />
+      <Route path="/backtest" component={Backtest} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

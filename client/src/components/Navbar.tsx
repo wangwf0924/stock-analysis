@@ -5,12 +5,13 @@
 
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { BarChart2, BookOpen, Home, Menu, X, Sparkles } from "lucide-react";
+import { BarChart2, BookOpen, Home, Menu, X, Sparkles, ArrowLeftRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_ITEMS = [
   { path: "/", label: "首页", icon: <Home className="w-4 h-4" /> },
   { path: "/analysis", label: "股票分析", icon: <BarChart2 className="w-4 h-4" /> },
+  { path: "/compare", label: "对比分析", icon: <ArrowLeftRight className="w-4 h-4" /> },
   { path: "/theories", label: "投资理论", icon: <BookOpen className="w-4 h-4" /> },
 ];
 

@@ -19,6 +19,7 @@ import {
 import { analyzeTrend, generatePrediction } from "@/lib/indicators";
 import { getRelevantTheories } from "@/lib/theories";
 import CandlestickChart from "@/components/CandlestickChart";
+import AStockPanel from "@/components/AStockPanel";
 import Navbar from "@/components/Navbar";
 
 const TIME_RANGES: { label: string; value: TimeRange }[] = [
@@ -406,6 +407,13 @@ export default function Analysis() {
                 </div>
               )}
             </div>
+
+            {/* A 股专属指标 */}
+            {isAStock(symbol) && stockData && (
+              <div className="mb-5">
+                <AStockPanel candles={stockData.candles} meta={stockData.meta} />
+              </div>
+            )}
 
             {/* 相关理论 */}
             <div className="glass-card p-5">

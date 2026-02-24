@@ -13,7 +13,6 @@ import {
   CandlestickSeries,
   HistogramSeries,
 } from "lightweight-charts";
-import type { IChartApi } from "lightweight-charts";
 import type { CandleData } from "@/lib/stockApi";
 import {
   calcMA,
@@ -39,26 +38,14 @@ export default function CandlestickChart({
 }: CandlestickChartProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const subChartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<IChartApi | null>(null);
-  const subChartRef = useRef<IChartApi | null>(null);
   const [activeIndicator, setActiveIndicator] = useState<IndicatorType>("MA");
   const [showVolume, setShowVolume] = useState(true);
 
   useEffect(() => {
     if (!chartContainerRef.current || candles.length === 0) return;
 
-    // 清理旧图表
-    if (chartRef.current) {
-      chartRef.current.remove();
-      chartRef.current = null;
-    }
-    if (subChartRef.current) {
-      subChartRef.current.remove();
-      subChartRef.current = null;
-    }
-
-    // 主图表
-    const chart = createChart(chartContainerRef.current, {
+    // 用本地变量持有图表引用，避免 ref 在 cleanup 时已被更新
+    let chart = createChart(chartContainerRef.current, {
       width: chartContainerRef.current.clientWidth,
       height,
       layout: {
@@ -96,7 +83,8 @@ export default function CandlestickChart({
         secondsVisible: false,
       },
     });
-    chartRef.current = chart;
+
+    type TimeType = import("lightweight-charts").Time;
 
     // K 线
     const candleSeries = chart.addSeries(CandlestickSeries, {
@@ -108,7 +96,6 @@ export default function CandlestickChart({
       wickDownColor: "#52C4A0",
     });
 
-    type TimeType = import("lightweight-charts").Time;
     const chartData = candles.map((c) => ({
       time: c.time as TimeType,
       open: c.open,
@@ -175,11 +162,12 @@ export default function CandlestickChart({
     chart.timeScale().fitContent();
 
     // 子图表
+    let subChart: ReturnType<typeof createChart> | null = null;
     if (
       subChartContainerRef.current &&
       (activeIndicator === "MACD" || activeIndicator === "RSI" || activeIndicator === "KDJ")
     ) {
-      const subChart = createChart(subChartContainerRef.current, {
+      subChart = createChart(subChartContainerRef.current, {
         width: subChartContainerRef.current.clientWidth,
         height: 140,
         layout: {
@@ -200,9 +188,9 @@ export default function CandlestickChart({
         rightPriceScale: { borderColor: "rgba(155, 127, 212, 0.2)" },
         timeScale: { borderColor: "rgba(155, 127, 212, 0.2)", visible: false },
       });
-      subChartRef.current = subChart;
 
       const addSubLine = (data: { time: number; value: number }[], color: string, lineStyle = 0) => {
+        if (!subChart) return;
         const s = subChart.addSeries(LineSeries, {
           color,
           lineWidth: 1,
@@ -248,30 +236,33 @@ export default function CandlestickChart({
 
       // 同步时间轴
       chart.timeScale().subscribeVisibleLogicalRangeChange((range) => {
-        if (range) subChart.timeScale().setVisibleLogicalRange(range);
+        if (range && subChart) {
+          try { subChart.timeScale().setVisibleLogicalRange(range); } catch (_) {}
+        }
       });
       subChart.timeScale().subscribeVisibleLogicalRangeChange((range) => {
-        if (range) chart.timeScale().setVisibleLogicalRange(range);
+        if (range) {
+          try { chart.timeScale().setVisibleLogicalRange(range); } catch (_) {}
+        }
       });
     }
 
     // 响应式
     const handleResize = () => {
       if (chartContainerRef.current) {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+        try { chart.applyOptions({ width: chartContainerRef.current.clientWidth }); } catch (_) {}
       }
-      if (subChartContainerRef.current && subChartRef.current) {
-        subChartRef.current.applyOptions({ width: subChartContainerRef.current.clientWidth });
+      if (subChartContainerRef.current && subChart) {
+        try { subChart.applyOptions({ width: subChartContainerRef.current.clientWidth }); } catch (_) {}
       }
     };
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      chart.remove();
-      if (subChartRef.current) {
-        subChartRef.current.remove();
-        subChartRef.current = null;
+      try { chart.remove(); } catch (_) {}
+      if (subChart) {
+        try { subChart.remove(); } catch (_) {}
       }
     };
   }, [candles, activeIndicator, showVolume, height]);

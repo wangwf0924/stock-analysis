@@ -4,7 +4,8 @@
  * 包含：Hero 区域、功能介绍、热门股票快览、每日格言
  */
 
-import { useState, useEffect } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { useState } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Search, TrendingUp, TrendingDown, BarChart2, BookOpen, Sparkles, ArrowRight, ChevronRight } from "lucide-react";
@@ -66,6 +67,10 @@ const FEATURES = [
 ];
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const [, navigate] = useLocation();
   const [searchInput, setSearchInput] = useState("");
   const [dailyQuote] = useState(() => DAILY_QUOTES[Math.floor(Math.random() * DAILY_QUOTES.length)]);
